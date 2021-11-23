@@ -1,16 +1,11 @@
 
-type TokenBalance @entity {
+type NFTBalance @entity {
   id: ID!
-  token: Token!
   amount: BigInt!
-  owner: User
-}
-type Token @entity {
-  id: ID!
-  tokenId: BigInt!
+  owner: User!
 }
 
 type User @entity {
   id: ID!
-  tokens:[TokenBalance!] @derivedFrom(field:"owner")
+  nfts:[NFTBalance]! @derivedFrom(field:"owner")
 }

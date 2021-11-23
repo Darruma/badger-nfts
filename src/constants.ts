@@ -9,3 +9,4 @@ export let BIGINT_ONE = BigInt.fromI32(1);
 export let BIGDECIMAL_ZERO = new BigDecimal(BIGINT_ZERO);
 export let BIGDECIMAL_ONE = toDecimal(BigInt.fromI32(10).pow(18));
 export let BIGDECIMAL_HUNDRED = toDecimal(BigInt.fromI32(10).pow(20));
+export const MEME_NFT_IDS = [97, 98, 99, 100, 101, 102, 205, 206, 208] as number[]; 
