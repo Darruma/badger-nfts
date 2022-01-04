@@ -8,13 +8,13 @@ import { getOrCreateNFTBalance, getOrCreateUser } from './utils';
 
 
 export function handleNFTTransfer(event: TransferSingle): void {
-   let fromAddress = event.params.to.toHexString()
-   let toAddress = event.params.from.toHexString()
+   let toAddress = event.params.to.toHexString()
+   let fromAddress = event.params.from.toHexString()
 
    let fromNftBalance = getOrCreateNFTBalance(event.address, event.params.id, fromAddress);
    let toNftBalance = getOrCreateNFTBalance(event.address, event.params.id, toAddress)
-   fromNftBalance.amount = fromNftBalance.amount.plus(event.params.value)
-   toNftBalance.amount = fromNftBalance.amount.minus(event.params.value)
+   fromNftBalance.amount = fromNftBalance.amount.minus(event.params.value)
+   toNftBalance.amount = toNftBalance.amount.plus(event.params.value)
 
    toNftBalance.save()
    fromNftBalance.save()
@@ -26,16 +26,13 @@ export function handleNFTTransfer(event: TransferSingle): void {
 export function handleMemeNFTTransfer(event: TransferSingleMeme): void {
   let id = event.params._id
   if (MEME_NFT_IDS.includes(id.toI32())) {
-    let fromAddress = event.params._to.toHexString()
-    let toAddress = event.params._from.toHexString()
+    let toAddress = event.params._to.toHexString()
+    let fromAddress = event.params._from.toHexString()
 
-    let fromNftBalance = getOrCreateNFTBalance(event.address, event.params._id, fromAddress);
-    let toNftBalance = getOrCreateNFTBalance(event.address, event.params._id, toAddress)
-    if (toAddress != ZERO_ADDRESS)
-    {
-      fromNftBalance.amount = fromNftBalance.amount.plus(event.params._amount)
-    }
-    toNftBalance.amount = fromNftBalance.amount.minus(event.params._amount)
+    let fromNftBalance = getOrCreateNFTBalance(event.address, id, fromAddress);
+    let toNftBalance = getOrCreateNFTBalance(event.address, id, toAddress)
+    fromNftBalance.amount = fromNftBalance.amount.minus(event.params._amount)
+    toNftBalance.amount = toNftBalance.amount.plus(event.params._amount)
 
     toNftBalance.save()
     fromNftBalance.save()

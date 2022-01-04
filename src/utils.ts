@@ -14,7 +14,7 @@ export function getOrCreateUser(address: string): User {
 export function getOrCreateNFTBalance(nftAddress: Address, nftId: BigInt , user: string): NFTBalance {
     let id = nftAddress.toHexString()
     .concat("-")
-    .concat(nftId.toHexString())
+    .concat(nftId.toString())
     .concat("-")
     .concat(user)
   
